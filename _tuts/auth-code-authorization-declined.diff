@@ -1,0 +1,17 @@
+diff --git a/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php b/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php
+index 305ca85..ee8d863 100644
+--- a/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php
++++ b/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php
+@@ -51,6 +51,12 @@ class CoopOAuthController extends BaseController
+         // equivalent to $_GET['code']
+         $code = $request->get('code');
+ 
++        if (!$code) {
++            return $this->render('failed_authorization.twig', array(
++                'response' => $request->query->all()
++            ));
++        }
++
+         $http = new Client('http://coop.apps.knpuniversity.com', array(
+             'request.options' => array(
+                 'exceptions' => false,

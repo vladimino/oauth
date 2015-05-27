@@ -1,0 +1,35 @@
+diff --git a/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php b/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php
+index d44b4fe..319f5ba 100644
+--- a/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php
++++ b/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php
+@@ -52,8 +52,14 @@ class CoopOAuthController extends BaseController
+         $code = $request->get('code');
+ 
+         if (!$code) {
++            $error = $request->get('error');
++            $errorDescription = $request->get('error_description');
++
+             return $this->render('failed_authorization.twig', array(
+-                'response' => $request->query->all()
++                'response' => array(
++                    'error' => $error,
++                    'error_description' => $errorDescription
++                )
+             ));
+         }
+ 
+diff --git a/client/src/OAuth2Demo/Client/Controllers/CountEggs.php b/client/src/OAuth2Demo/Client/Controllers/CountEggs.php
+index 93c5058..bc94c7c 100644
+--- a/client/src/OAuth2Demo/Client/Controllers/CountEggs.php
++++ b/client/src/OAuth2Demo/Client/Controllers/CountEggs.php
+@@ -23,6 +23,10 @@ class CountEggs extends BaseController
+     {
+         $user = $this->getLoggedInUser();
+ 
++        if (!$user->coopAccessToken || !$user->coopUserId) {
++            throw new \Exception('Somehow you got here, but without a valid COOP access token! Re-authorize!');
++        }
++
+         $http = new Client('http://coop.apps.knpuniversity.com', array(
+             'request.options' => array(
+                 'exceptions' => false,

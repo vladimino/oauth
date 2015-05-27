@@ -1,0 +1,74 @@
+title:  OAuth2 in 8 Steps
+length: 1:33:17
+summary: |
+    OAuth2: that mystical beast that you kind of understand and occasionally
+    wrestle to integrate with some social media site.
+
+    Time to master OAuth2... and why not do it by building a real app with
+    farmers, chickens and real-life providers like Facebook and Google Plus.
+    We'll show you how OAuth really works while looking at how OAuth will
+    feel by using SDK's and other tools that give you shortcuts.
+
+    And like always, we'll go directly at the ugly details, like token expiration
+    and having a user deny access to your application. Here's what you'll
+    be learning:
+
+    * 3 main OAuth grant types: client credentials, authorization code and implicit;
+    * The exact flow behind getting your application authorized, exchanging
+      an authorization code for a token, and using the token;
+    * Authentication (single sign-on) using OAuth;
+    * Handling expired tokens;
+    * Using refresh tokens;
+    * Integrating and authentication with Facebook;
+    * OAuth integration with Google+;
+    * What to look out for with security and how you can tighten things.
+
+illustration: oauth.png
+hasVideoDownload: 1
+videoDownloadExtension: mov
+
+chapters:
+    intro:
+        title:      Introduction
+        is_free:    true
+        video_key:  mmxu01p6ir
+    client-credentials:
+        title:      Client Credentials
+        is_free:    true
+        video_key:  3agaxjymqe
+    authorization-code:
+        title:      Authorization Code Grant Type
+        is_free:    false
+        video_key:  i9if5mvrrk
+    authorization-code2:
+        title:      Authorization Code: Saving the Token & Handling Failures
+        is_free:    false
+        video_key:  o90heb6gma
+    logging-in:
+        title:      User Login with OAuth
+        is_free:    false
+        video_key:  4rsdudrgrs
+    facebook:
+        title:      Oauth with Facebook
+        is_free:    false
+        video_key:  8n1v796k60
+    facebook2:
+        title:      Facebook: Using the API, Logging in and Failure
+        is_free:    false
+        video_key:  50be9e529j
+    javascript-implicit-google-plus:
+        title:      Implicit Grant Type with Google+
+        is_free:    false
+        video_key:  3tzgy9t6ub
+    implicit2:
+        title:      Implicit+Google Round 2
+        is_free:    false
+        video_key:  jcsvj9topd
+    refresh-token:
+        title:      Using Refresh Tokens
+        is_free:    false
+        video_key:  2390xgw7g5
+    security:
+        title:      Tightening up Security
+        is_free:    false
+        video_key:  oojikulbcs
