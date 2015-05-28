@@ -26,11 +26,15 @@ class CoopOAuthController extends BaseController
     {
         $redirectUrl = $this->generateUrl('coop_authorize_redirect', array(), true);
 
+        $state = md5(uniqid(mt_rand(), true));
+        $request->getSession()->set('oauth.state', $state);
+
         $url = 'http://coop.apps.knpuniversity.com/authorize?' . http_build_query(array(
                 'response_type' => 'code',
                 'client_id' => 'Top Cluck App',
                 'redirect_uri' => $redirectUrl,
-                'scope' => 'eggs-count profile'
+                'scope' => 'eggs-count profile',
+                'state' => $state
             ));
 
         return $this->redirect($url);
@@ -48,6 +52,15 @@ class CoopOAuthController extends BaseController
      */
     public function receiveAuthorizationCode(Application $app, Request $request)
     {
+        if ($request->get('state') !== $request->getSession()->get('oauth.state')) {
+            return $this->render(
+                'failed_authorization.twig',
+                array('response' => array(
+                    'error_description' => 'Your session has expired. Please try again.'
+                ))
+            );
+        }
+
         // equivalent to $_GET['code']
         $code = $request->get('code');
 
@@ -76,7 +89,8 @@ class CoopOAuthController extends BaseController
             'client_secret' => 'b60af9f69ceb19ebacfb7bc324a8a5dc',
             'grant_type' => 'authorization_code',
             'code' => $code,
-            'redirect_uri' => $redirectUrl
+            'redirect_uri' => $redirectUrl,
+           // 'state' => $state
         ));
 
         // make a request to the token url
