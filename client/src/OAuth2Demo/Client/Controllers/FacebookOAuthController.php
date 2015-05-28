@@ -2,6 +2,7 @@
 
 namespace OAuth2Demo\Client\Controllers;
 
+use Facebook;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +25,33 @@ class FacebookOAuthController extends BaseController
      */
     public function redirectToAuthorization()
     {
-        die('Todo: Redirect to Facebook');
+
+
+        $facebook = $this->createFacebook();
+
+        $redirectUrl = $this->generateUrl(
+            'facebook_authorize_redirect',
+            array(),
+            true
+        );
+
+        $url = $facebook->getLoginUrl(array(
+            'redirect_uri' => $redirectUrl,
+            'scope' => array('publish_actions', 'email')
+        ));
+
+        return $this->redirect($url);
+    }
+
+    private function createFacebook()
+    {
+        $config = array(
+            'appId' => '1400036810324657',
+            'secret' => '30b608fd1571667026610dead21753dc',
+            'allowSignedRequest' => false
+        );
+
+        return new \Facebook($config);
     }
 
     /**
@@ -39,7 +66,21 @@ class FacebookOAuthController extends BaseController
      */
     public function receiveAuthorizationCode(Application $app, Request $request)
     {
-        die('Todo: Handle after Facebook redirects to us');
+        $facebook = $this->createFacebook();
+
+        $userId = $facebook->getUser();
+
+        if (!$userId) {
+            return $this->render('failed_authorization.twig', array(
+                'response' => $request->query->all()
+            ));
+        }
+
+        $user = $this->getLoggedInUser();
+        $user->facebookUserId = $userId;
+        $this->saveUser($user);
+
+        return $this->redirect($this->generateUrl('home'));
     }
 
     /**
