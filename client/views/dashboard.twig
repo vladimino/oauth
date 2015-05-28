@@ -32,6 +32,7 @@
             </div>
 
             <a href="#" class="btn btn-lg btn-info js-google-signin">Connect with Google+</a>
+            <div id="google-plus-farmers"></div>
 
         </div>
         <div class="col-md-6">
@@ -44,24 +45,45 @@
     {{ parent() }}
 
     <script>
-        jQuery(document).ready(function() {
-            $('.js-google-signin').on('click', function(e) {
+        jQuery(document).ready(function () {
+            $('.js-google-signin').on('click', function (e) {
                 // prevent the click from going to #
                 e.preventDefault();
-                var myParams = {
-                    'clientid': '765652966023-rfgdou5maa5tgcl79324hvt4cr9jh5dv.apps.googleusercontent.com',
-                    'cookiepolicy': 'single_host_origin',
-                    'callback': 'mySignInCallback',
-                    'scope': 'https://www.googleapis.com/auth/plus.login',
-                    'requestvisibleactions': 'http://schemas.google.com/AddActivity'
-                };
-                gapi.auth.signIn(myParams);
+                gapi.auth.signIn();
             });
         });
 
         function mySignInCallback(authResult) {
-                console.log(authResult);
+            if (authResult['status']['signed_in']) {
+                // Update the app to reflect a signed in user
+                $('.js-google-signin').hide();
+                // loads the gapi.client.plus JavaScript object
+                gapi.client.load('plus','v1', function() {
+                    loadCirclesPeople();
+                });
+            } else {
+                // Possible error values:
+                //   "user_signed_out" - User is signed-out
+                //   "access_denied" - User denied access to your app
+                //   "immediate_failed" - Could not automatically log in the user
+                console.log('Sign-in state: ' + authResult['error']);
             }
+        }
+        function loadCirclesPeople() {
+            var request = gapi.client.plus.people.list({
+                'userId': 'me',
+                'collection': 'visible'
+            });
+            request.execute(function (people) {
+                var $people = $('#google-plus-farmers');
+                $people.empty();
+                for (var personIndex in people.items) {
+                    var person = people.items[personIndex];
+                    $people.append('<a href="'+person.url + '" target="_blank" title="'+ person.displayName +'"><img src="' + person.image.url + '"></a>');
+                }
+            });
+        }
+
     </script>
 
     {# Put any JavaScript here #}
