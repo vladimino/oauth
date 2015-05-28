@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11b9fd04-342a-4ae3-80b1-8397a7bbf914" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/base.twig" afterPath="$PROJECT_DIR$/client/views/base.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/dashboard.twig" afterPath="$PROJECT_DIR$/client/views/dashboard.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php" afterPath="$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/data/refresh_tokens.php" afterPath="$PROJECT_DIR$/client/data/refresh_tokens.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="oauth.iws" />
@@ -30,73 +30,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="collect_eggs.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cron/collect_eggs.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.961538" vertical-offset="105" max-vertical-offset="663">
-              <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CoopOAuthController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.1538463" vertical-offset="171" max-vertical-offset="2482">
-              <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+            <state vertical-scroll-proportion="-6.3846154" vertical-offset="1058" max-vertical-offset="2516">
+              <caret line="75" column="64" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views/user/login.twig">
+      <file leaf-file-name="refresh_tokens.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/data/refresh_tokens.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.653847" vertical-offset="203" max-vertical-offset="952">
-              <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboard.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/views/dashboard.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17747441" vertical-offset="815" max-vertical-offset="1632">
-              <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FacebookOAuthController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/FacebookOAuthController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.9615383" vertical-offset="2216" max-vertical-offset="2856">
-              <caret line="141" column="52" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
-              <folding>
-                <element signature="e#49#62#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views/base.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="2380">
-              <caret line="12" column="121" selection-start-line="12" selection-start-column="121" selection-end-line="12" selection-end-column="121" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CountEggs.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/CountEggs.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.346154" vertical-offset="292" max-vertical-offset="1037">
-              <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.32492998" vertical-offset="411" max-vertical-offset="969">
+              <caret line="31" column="6" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -122,11 +70,12 @@
       <list>
         <option value="$PROJECT_DIR$/cron/collect_eggs.php" />
         <option value="$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/CountEggs.php" />
-        <option value="$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php" />
         <option value="$PROJECT_DIR$/client/views/user/login.twig" />
         <option value="$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/FacebookOAuthController.php" />
         <option value="$PROJECT_DIR$/client/views/base.twig" />
         <option value="$PROJECT_DIR$/client/views/dashboard.twig" />
+        <option value="$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php" />
+        <option value="$PROJECT_DIR$/client/data/refresh_tokens.php" />
       </list>
     </option>
   </component>
@@ -408,7 +357,13 @@
       <option name="project" value="LOCAL" />
       <updated>1432825096982</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Implicit+Google Round 2">
+      <created>1432847164595</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1432847164595</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -426,7 +381,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25340393" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -459,7 +414,8 @@
     <MESSAGE value="Oauth with Facebook" />
     <MESSAGE value="Facebook: Using the API, Logging in and Failure" />
     <MESSAGE value="Implicit Grant Type with Google+" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implicit Grant Type with Google+" />
+    <MESSAGE value="Implicit+Google Round 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implicit+Google Round 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -527,14 +483,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1538463" vertical-offset="171" max-vertical-offset="2482">
-          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/user/login.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.653847" vertical-offset="203" max-vertical-offset="952">
@@ -563,8 +511,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views/dashboard.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17747441" vertical-offset="815" max-vertical-offset="1632">
+        <state vertical-scroll-proportion="-0.962963" vertical-offset="815" max-vertical-offset="1632">
           <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/OAuth2Demo/Client/Controllers/CoopOAuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.3846154" vertical-offset="1058" max-vertical-offset="2516">
+          <caret line="75" column="64" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/data/refresh_tokens.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32492998" vertical-offset="411" max-vertical-offset="969">
+          <caret line="31" column="6" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
           <folding />
         </state>
       </provider>
