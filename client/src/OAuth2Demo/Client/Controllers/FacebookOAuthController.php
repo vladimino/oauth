@@ -60,14 +60,13 @@ class FacebookOAuthController extends BaseController
      * Here, we will get the authorization code from the request, exchange
      * it for an access token, and maybe do some other setup things.
      *
-     * @param  Application             $app
-     * @param  Request                 $request
+     * @param  Application $app
+     * @param  Request $request
      * @return string|RedirectResponse
      */
     public function receiveAuthorizationCode(Application $app, Request $request)
     {
         $facebook = $this->createFacebook();
-
         $userId = $facebook->getUser();
 
         if (!$userId) {
@@ -76,7 +75,20 @@ class FacebookOAuthController extends BaseController
             ));
         }
 
-        $user = $this->getLoggedInUser();
+        try {
+            $json = $facebook->api('/me');
+        } catch (\FacebookApiException $e) {
+            return $this->render('failed_token_request.twig', array('response' => $e->getMessage()));
+        }
+
+        if ($this->isUserLoggedIn()) {
+            $user = $this->getLoggedInUser();
+        } else {
+            $user = $this->findOrCreateUser($json);
+
+            $this->loginUser($user);
+        }
+
         $user->facebookUserId = $userId;
         $this->saveUser($user);
 
@@ -91,8 +103,60 @@ class FacebookOAuthController extends BaseController
      */
     public function shareProgressOnFacebook()
     {
-        die('Todo: Use Facebook\'s API to post to someone\'s feed');
+        $facebook = $this->createFacebook();
+        $eggCount = $this->getTodaysEggCountForUser($this->getLoggedInUser());
+
+        $ret = $this->makeApiRequest(
+            $facebook,
+            '/' . $facebook->getUser() . '/feed',
+            'POST',
+            array(
+                'message' => sprintf('Woh my chickens have laid %s eggs today!', $eggCount),
+            )
+        );
+
+        // if makeApiRequest returns a redirect, do it! The user needs to re-authorize
+        if ($ret instanceof RedirectResponse) {
+            return $ret;
+        }
 
         return $this->redirect($this->generateUrl('home'));
+    }
+
+    private function makeApiRequest(\Facebook $facebook, $url, $method, $parameters)
+    {
+        try {
+            return $facebook->api($url, $method, $parameters);
+        } catch (\FacebookApiException $e) {
+            // https://developers.facebook.com/docs/graph-api/using-graph-api/#errors
+            if ($e->getType() == 'OAuthException' || in_array($e->getCode(), array(190, 102))) {
+                // our token is bad - reauthorize to get a new token
+                return $this->redirect($this->generateUrl('facebook_authorize_start'));
+            }
+
+            // it failed for some odd reason...
+            throw $e;
+        }
+    }
+
+    private function findOrCreateUser(array $meData)
+    {
+        if ($user = $this->findUserByFacebookId($meData['id'])) {
+            return $user;
+        }
+
+        if ($user = $this->findUserByEmail($meData['email'])) {
+            return $user;
+        }
+
+        $user = $this->createUser(
+            $meData['email'],
+            // a blank password - this user hasn't created a password yet!
+            '',
+            $meData['first_name'],
+            $meData['last_name']
+        );
+
+        return $user;
     }
 }
