@@ -31,6 +31,8 @@
                 </div>
             </div>
 
+            <a href="#" class="btn btn-lg btn-info js-google-signin">Connect with Google+</a>
+
         </div>
         <div class="col-md-6">
             {{ include('_leaderboard.twig', { 'egg_counts': egg_counts }) }}
@@ -40,6 +42,27 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    <script>
+        jQuery(document).ready(function() {
+            $('.js-google-signin').on('click', function(e) {
+                // prevent the click from going to #
+                e.preventDefault();
+                var myParams = {
+                    'clientid': '765652966023-rfgdou5maa5tgcl79324hvt4cr9jh5dv.apps.googleusercontent.com',
+                    'cookiepolicy': 'single_host_origin',
+                    'callback': 'mySignInCallback',
+                    'scope': 'https://www.googleapis.com/auth/plus.login',
+                    'requestvisibleactions': 'http://schemas.google.com/AddActivity'
+                };
+                gapi.auth.signIn(myParams);
+            });
+        });
+
+        function mySignInCallback(authResult) {
+                console.log(authResult);
+            }
+    </script>
 
     {# Put any JavaScript here #}
 {% endblock %}
