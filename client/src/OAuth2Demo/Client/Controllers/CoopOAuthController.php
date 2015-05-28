@@ -100,12 +100,44 @@ class CoopOAuthController extends BaseController
         $response = $request->send();
         $meData = json_decode($response->getBody(), true);
 
-        $user = $this->getLoggedInUser();
+        if ($this->isUserLoggedIn()) {
+            $user = $this->getLoggedInUser();
+        } else {
+            $user = $this->findOrCreateUser($meData);
+
+            $this->loginUser($user);
+        }
+
         $user->coopAccessToken = $accessToken;
         $user->coopUserId = $meData['id'];
         $user->coopAccessExpiresAt = $expiresAt;
         $this->saveUser($user);
 
         return $this->redirect($this->generateUrl('home'));
+    }
+
+    private function findOrCreateUser(array $meData)
+    {
+        if ($user = $this->findUserByCOOPId($meData['id'])) {
+            // this is an existing user. Yay!
+            return $user;
+        }
+
+        if ($user = $this->findUserByEmail($meData['email'])) {
+            // we match by email
+            // we have to think if we should trust this. Is it possible to
+            // register at COOP with someone else's email?
+            return $user;
+        }
+
+        $user = $this->createUser(
+            $meData['email'],
+            // a blank password - this user hasn't created a password yet!
+            '',
+            $meData['firstName'],
+            $meData['lastName']
+        );
+
+        return $user;
     }
 }
