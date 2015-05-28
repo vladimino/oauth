@@ -51,6 +51,18 @@ class CoopOAuthController extends BaseController
         // equivalent to $_GET['code']
         $code = $request->get('code');
 
+        if (!$code) {
+            $error = $request->get('error');
+            $errorDescription = $request->get('error_description');
+
+            return $this->render('failed_authorization.twig', array(
+                'response' => array(
+                    'error' => $error,
+                    'error_description' => $errorDescription
+                )
+            ));
+        }
+
         $redirectUrl = $this->generateUrl('coop_authorize_redirect', array(), true);
 
         $http = new Client('http://coop.apps.knpuniversity.com', array(
@@ -72,12 +84,28 @@ class CoopOAuthController extends BaseController
         $responseBody = $response->getBody(true);
         $responseArr = json_decode($responseBody, true);
 
+        // if there is no access_token, we have a problem!!!
+        if (!isset($responseArr['access_token'])) {
+            return $this->render('failed_token_request.twig', array(
+                'response' => $responseArr ? $responseArr : $response
+            ));
+        }
+
         $accessToken = $responseArr['access_token'];
         $expiresIn = $responseArr['expires_in'];
+        $expiresAt = new \DateTime('+' . $expiresIn . ' seconds');
 
         $request = $http->get('/api/me');
-        $request->addHeader('Authorization', 'Bearer '.$accessToken);
+        $request->addHeader('Authorization', 'Bearer ' . $accessToken);
         $response = $request->send();
-        echo ($response->getBody(true));die;
+        $meData = json_decode($response->getBody(), true);
+
+        $user = $this->getLoggedInUser();
+        $user->coopAccessToken = $accessToken;
+        $user->coopUserId = $meData['id'];
+        $user->coopAccessExpiresAt = $expiresAt;
+        $this->saveUser($user);
+
+        return $this->redirect($this->generateUrl('home'));
     }
 }
